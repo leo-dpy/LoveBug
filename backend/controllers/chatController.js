@@ -24,3 +24,23 @@ exports.getHistory = async (req, res) => {
         res.status(500).json({ message: "Erreur serveur" });
     }
 };
+
+exports.toggleSave = async (req, res) => {
+    try {
+        const { messageId } = req.body;
+        const userId = req.user.id;
+
+        const checkSql = `SELECT is_saved FROM messages WHERE id = ? AND (sender_id = ? OR receiver_id = ?)`;
+        const [rows] = await db.execute(checkSql, [messageId, userId, userId]);
+        if (rows.length === 0) return res.status(403).json({ message: "Action non autorisée." });
+
+        const newStatus = rows[0].is_saved ? false : true;
+        const updateSql = `UPDATE messages SET is_saved = ? WHERE id = ?`;
+        await db.execute(updateSql, [newStatus, messageId]);
+
+        res.status(200).json({ is_saved: newStatus });
+    } catch (e) {
+        console.error("Erreur toggleSave:", e);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};

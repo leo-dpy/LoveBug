@@ -163,7 +163,41 @@ function appendMessage(msg, type) {
 
     const div = document.createElement('div');
     div.className = `message ${type}`;
+    if (msg.is_saved) {
+        div.classList.add('saved-message');
+    }
     div.textContent = msg.content;
+
+    // Ajout titre indicateur
+    div.title = "Double-cliquez pour conserver ce message dans le temps.";
+
+    // Action de sauvegarde (double click)
+    div.addEventListener('dblclick', async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API_URL}/chat/toggle-save`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ messageId: msg.id })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                if (data.is_saved) {
+                    div.classList.add('saved-message');
+                } else {
+                    div.classList.remove('saved-message');
+                }
+            } else {
+                console.warn("Impossible de changer l'état de sauvegarde du message.");
+            }
+        } catch (err) {
+            console.error("Erreur save chat", err);
+        }
+    });
 
     messagesContainer.appendChild(div);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;

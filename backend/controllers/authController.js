@@ -60,6 +60,9 @@ exports.login = async (req, res) => {
             { expiresIn: '24h' }
         );
 
+        // Mettre à jour la date de dernière connexion
+        await db.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?', [user.id]);
+
         res.status(200).json({
             message: "Connexion réussie !",
             token,

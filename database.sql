@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
     gender ENUM('male', 'female', 'other') DEFAULT 'other',
     preferences ENUM('male', 'female', 'everyone') DEFAULT 'everyone',
     location VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Table Amis
@@ -47,6 +48,7 @@ CREATE TABLE IF NOT EXISTS messages (
     receiver_id INT NOT NULL,
     content TEXT NOT NULL,
     is_read BOOLEAN DEFAULT FALSE,
+    is_saved BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE

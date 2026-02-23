@@ -155,6 +155,16 @@
     font-size: 0.95rem;
     line-height: 1.4;
     word-wrap: break-word;
+    user-select: none;
+    /* for double click */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.message.saved-message {
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.2);
+    font-weight: 500;
 }
 
 .message.received {

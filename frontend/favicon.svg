@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <!-- Liquid Glass & Neon Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3366" />
+      <stop offset="100%" stop-color="#7b2cbf" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background is naturally transparent -->
+
+  <!-- Wings (Glassmorphism look) -->
+  <path d="M 50 40 C 30 15 5 30 20 60 C 30 70 50 50 50 40 Z" fill="rgba(0, 245, 212, 0.4)" stroke="#00f5d4" stroke-width="1.5" filter="url(#glow)"/>
+  <path d="M 50 40 C 70 15 95 30 80 60 C 70 70 50 50 50 40 Z" fill="rgba(0, 245, 212, 0.4)" stroke="#00f5d4" stroke-width="1.5" filter="url(#glow)"/>
+
+  <!-- Antennas -->
+  <path d="M 45 30 Q 30 10 20 20" fill="none" stroke="#ff3366" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M 55 30 Q 70 10 80 20" fill="none" stroke="#ff3366" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  
+  <!-- Antenna glowing tips -->
+  <circle cx="20" cy="20" r="3" fill="#ff3366" filter="url(#glow)"/>
+  <circle cx="80" cy="20" r="3" fill="#ff3366" filter="url(#glow)"/>
+
+  <!-- Heart / Bug Body -->
+  <path d="M 50 85 C 50 85 15 50 15 25 C 15 10 35 5 50 20 C 65 5 85 10 85 25 C 85 50 50 85 50 85 Z" fill="url(#heartGrad)" stroke="#ffaaee" stroke-width="1" filter="url(#glow)"/>
+</svg>
