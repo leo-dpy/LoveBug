@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Accueil</title>
+    <link rel="manifest" href="../assets/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Background Animé -->
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation Globale -->
+    <nav class="glass-nav">
+        <div class="nav-logo">Love<span>Bug</span></div>
+        <div class="nav-links">
+            <a href="home.html" class="active" title="Accueil"><i class="fa-solid fa-house"></i></a>
+            <a href="discover.html" title="Découvrir"><i class="fa-solid fa-compass"></i></a>
+            <a href="friends.html" title="Amis"><i class="fa-solid fa-user-group"></i></a>
+            <a href="chat.html" title="Messages"><i class="fa-solid fa-comment"></i></a>
+            <a href="profile.html" title="Profil"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="home-container scrollable-area">
+        <div class="welcome-header">
+            <h1 id="welcome-message">Bonjour, <span>Étudiant</span></h1>
+            <p class="text-muted">Prêt(e) à faire de nouvelles rencontres sur le campus ?</p>
+        </div>
+
+        <!-- Statistiques rapides -->
+        <section class="stats-grid">
+            <a href="discover.html" class="stat-card glass-panel">
+                <i class="fa-solid fa-heart pulse-icon"></i>
+                <div class="stat-info">
+                    <h3>Matchs</h3>
+                    <p>Découvre qui t'aime</p>
+                </div>
+            </a>
+            <a href="chat.html" class="stat-card glass-panel">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="stat-info">
+                    <h3>Messages</h3>
+                    <p>Discute en direct</p>
+                </div>
+            </a>
+            <a href="friends.html" class="stat-card glass-panel">
+                <i class="fa-solid fa-users"></i>
+                <div class="stat-info">
+                    <h3>Campus</h3>
+                    <p>Trouve des amis</p>
+                </div>
+            </a>
+        </section>
+
+        <!-- Actions Rapides -->
+        <h2 class="section-title">Actions Rapides</h2>
+        <section class="quick-actions">
+            <a href="discover.html" class="action-btn primary-action">
+                <i class="fa-solid fa-fire"></i>
+                Lancer le Radar (Swipe)
+            </a>
+            <a href="friends.html" class="action-btn secondary-action">
+                <i class="fa-solid fa-user-plus"></i>
+                Ajouter un(e) pote
+            </a>
+        </section>
+
+        <!-- Actualités du campus (Fake feed pour le projet étudiant) -->
+        <h2 class="section-title">Actualités Ynov / Campus</h2>
+        <section class="news-feed">
+            <div class="news-card glass-panel">
+                <div class="news-tag info">Info</div>
+                <h3>La Bêta de LoveBug est ouverte</h3>
+                <p>Testez l'application de rencontre conçue par les étudiants, pour les étudiants. N'hésitez pas à faire
+                    des retours !</p>
+                <span class="news-date">Hier</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/home.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../assets/js/sw.js')
+                .then(reg => console.log('SW Registered', reg))
+                .catch(err => console.error('SW Error', err));
+        }
+    </script>
+</body>
+
+</html>

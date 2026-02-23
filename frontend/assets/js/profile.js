@@ -89,7 +89,7 @@ async function loadProfile(token) {
         document.getElementById('profile-username').textContent = data.username;
         document.getElementById('profile-email').textContent = data.email;
 
-        const avatarUrl = data.profile_picture !== 'default.png' ? data.profile_picture : `https://api.dicebear.com/7.x/avataaars/svg?seed=${data.username}`;
+        const avatarUrl = (data.profile_picture && data.profile_picture !== 'default.png') ? data.profile_picture : `../assets/images/default-avatar.svg`;
         document.getElementById('profile-picture').src = avatarUrl;
 
         // Remplir le formulaire

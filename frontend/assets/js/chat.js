@@ -14,12 +14,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     currentUser = JSON.parse(userStr);
 
-    // Initialiser Socket.io
-    socket = io('http://localhost:3000');
-    socket.on('connect', () => {
-        console.log('Connecté au WebSocket');
-        socket.emit('register_user', currentUser.id);
-    });
+    // Initialiser Socket.io (via global object created in notifications.js)
+    socket = window.socket || io('http://localhost:3000');
+    if (!window.socket) {
+        socket.on('connect', () => {
+            console.log('Connecté au WebSocket');
+            socket.emit('register_user', currentUser.id);
+        });
+        window.socket = socket;
+    }
 
     // Écouter les nouveaux messages entrants
     socket.on('receive_message', (msg) => {
@@ -71,7 +74,7 @@ async function loadContacts(token) {
         }
 
         contacts.forEach(c => {
-            const imgUrl = c.profile_picture !== 'default.png' ? c.profile_picture : `https://api.dicebear.com/7.x/avataaars/svg?seed=${c.username}`;
+            const imgUrl = (c.profile_picture && c.profile_picture !== 'default.png') ? c.profile_picture : `../assets/images/default-avatar.svg`;
             const item = document.createElement('div');
             item.className = 'contact-item';
             item.innerHTML = `
@@ -99,7 +102,7 @@ async function openChat(contact) {
     document.getElementById('active-chat').classList.remove('hidden');
     document.getElementById('chat-username').textContent = contact.username;
 
-    const avatarUrl = contact.profile_picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${contact.username}`;
+    const avatarUrl = (contact.profile_picture && contact.profile_picture !== 'default.png') ? contact.profile_picture : `../assets/images/default-avatar.svg`;
     document.getElementById('chat-avatar').src = avatarUrl;
 
     // Mobile: hide sidebar

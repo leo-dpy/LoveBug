@@ -2,9 +2,12 @@ const API_URL = 'http://localhost:3000/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Redirection automatique si déjà connecté
-    if (localStorage.getItem('token')) {
-        window.location.href = 'discover.html';
-        return;
+    const token = localStorage.getItem('token');
+    const userStr = localStorage.getItem('user');
+
+    if (token && userStr && window.location.pathname.endsWith('index.html')) {
+        window.location.href = 'home.html';
+        return; // Added return to stop further execution if redirected
     }
 
     const tabLogin = document.getElementById('tab-login');
@@ -58,10 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.ok) {
                 // Sauvegarder le token JWT et les infos
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-
-                alert('Connexion réussie !');
-                window.location.href = 'discover.html'; // Redirection
+                localStorage.setItem('user', JSON.stringify(data.user)); // Redirection
+                window.location.href = 'home.html';
             } else {
                 alert(data.message || "Erreur de connexion.");
             }
@@ -96,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
 
             if (res.ok) {
-                alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
                 tabLogin.click(); // Switch to login tab
             } else {
                 alert(data.message || "Erreur lors de l'inscription.");

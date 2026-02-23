@@ -58,8 +58,7 @@ function renderStack() {
         card.id = `card-${i}`;
         card.style.zIndex = potentials.length - i;
 
-        // Simuler une image de profil
-        const imgUrl = user.profile_picture !== 'default.png' ? user.profile_picture : `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.username}`;
+        const imgUrl = (user.profile_picture && user.profile_picture !== 'default.png') ? user.profile_picture : `../assets/images/default-avatar.svg`;
 
         card.innerHTML = `
             <div class="card-stamp stamp-like" id="stamp-like-${i}">LIKE</div>

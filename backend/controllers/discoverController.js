@@ -57,6 +57,16 @@ exports.swipe = async (req, res) => {
                 `;
                 await db.execute(updateMatchSql, [userId1, targetUserId, targetUserId, userId1]);
 
+                // Emit notification
+                const io = req.app.get('io');
+                const connectedUsers = req.app.get('connectedUsers');
+                const targetSocketId = connectedUsers.get(parseInt(targetUserId));
+                if (targetSocketId) {
+                    io.to(targetSocketId).emit('new_match', {
+                        message: "Vous avez matché avec quelqu'un !"
+                    });
+                }
+
                 return res.status(200).json({ message: "It's a Match!", match: true });
             }
         }

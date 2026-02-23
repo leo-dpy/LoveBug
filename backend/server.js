@@ -61,6 +61,10 @@ const io = new Server(server, {
 // Gérer les utilisateurs connectés: Map<userId, socketId>
 const connectedUsers = new Map();
 
+// Rendre io et connectedUsers accessibles dans les routes
+app.set('io', io);
+app.set('connectedUsers', connectedUsers);
+
 io.on('connection', (socket) => {
     console.log(`🔌 Nouvel utilisateur connecté: ${socket.id}`);
 
@@ -89,6 +93,9 @@ io.on('connection', (socket) => {
             const receiverSocket = connectedUsers.get(receiverId);
             if (receiverSocket) {
                 io.to(receiverSocket).emit('receive_message', messageObj);
+                io.to(receiverSocket).emit('new_message_notification', {
+                    message: "Vous avez reçu un nouveau message."
+                });
             }
             // Renvoyer à l'envoyeur pour confirmer
             socket.emit('message_sent', messageObj);
@@ -112,6 +119,13 @@ io.on('connection', (socket) => {
 
 // Servir les fichiers statiques du frontend (HTML, CSS, JS) et les uploads
 const path = require('path');
+
+// Autoriser le Service Worker a avoir un scope global (/) meme s'il est dans /assets/js/
+app.get('/assets/js/sw.js', (req, res, next) => {
+    res.setHeader('Service-Worker-Allowed', '/');
+    next();
+});
+
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

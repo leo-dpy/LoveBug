@@ -55,7 +55,7 @@ async function fetchFriends(token) {
         }
 
         friends.forEach(f => {
-            const imgUrl = f.profile_picture !== 'default.png' ? f.profile_picture : `https://api.dicebear.com/7.x/avataaars/svg?seed=${f.username}`;
+            const imgUrl = (f.profile_picture && f.profile_picture !== 'default.png') ? f.profile_picture : `../assets/images/default-avatar.svg`;
             container.innerHTML += `
                 <div class="user-item">
                     <img src="${imgUrl}" alt="${f.username}" class="user-avatar">
@@ -95,19 +95,20 @@ async function fetchRequests(token) {
         }
 
         requests.forEach(req => {
-            const imgUrl = req.profile_picture !== 'default.png' ? req.profile_picture : `https://api.dicebear.com/7.x/avataaars/svg?seed=${req.username}`;
-            container.innerHTML += `
-                <div class="user-item">
-                    <img src="${imgUrl}" alt="${req.username}" class="user-avatar">
-                    <div class="user-info">
-                        <div class="user-name">${req.username}</div>
-                        <div class="user-status">Souhaite vous ajouter</div>
-                    </div>
-                    <button class="btn-icon accept" onclick="acceptRequest(${req.request_id})" title="Accepter">
-                        <i class="fa-solid fa-check"></i>
-                    </button>
+            const imgUrl = (req.profile_picture && req.profile_picture !== 'default.png') ? req.profile_picture : `../assets/images/default-avatar.svg`;
+            const div = document.createElement('div');
+            div.className = 'user-item'; // Changed from 'friend-card' to 'user-item' to match existing styling
+            div.innerHTML = `
+                <img src="${imgUrl}" alt="${req.username}" class="user-avatar">
+                <div class="user-info">
+                    <div class="user-name">${req.username}</div>
+                    <div class="user-status">Souhaite vous ajouter</div>
                 </div>
+                <button class="btn-icon accept" onclick="acceptRequest(${req.request_id})" title="Accepter">
+                    <i class="fa-solid fa-check"></i>
+                </button>
             `;
+            container.appendChild(div);
         });
     } catch (err) {
         console.error(err);

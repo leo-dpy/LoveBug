@@ -21,6 +21,16 @@ exports.sendRequest = async (req, res) => {
         const insertSql = `INSERT INTO friends (user_id_1, user_id_2, status) VALUES (?, ?, 'pending')`;
         await db.execute(insertSql, [userId, targetUserId]);
 
+        // Emit notification
+        const io = req.app.get('io');
+        const connectedUsers = req.app.get('connectedUsers');
+        const targetSocketId = connectedUsers.get(parseInt(targetUserId));
+        if (targetSocketId) {
+            io.to(targetSocketId).emit('new_friend_request', {
+                message: "Quelqu'un veut être votre ami(e) !"
+            });
+        }
+
         res.status(200).json({ message: "Demande d'ami envoyée." });
     } catch (error) {
         console.error("Erreur sendRequest:", error);

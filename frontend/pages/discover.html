@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoveBug - Découverte</title>
-    <link rel="manifest" href="../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="manifest" href="../assets/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
     <meta name="theme-color" content="#ff3366">
     <!-- On réutilise le style de base pour le background -->
@@ -23,14 +23,15 @@
         <div class="orb orb-3"></div>
     </div>
 
-    <!-- Menu de navigation -->
+    <!-- Menu    <!-- Navigation Globale -->
     <nav class="glass-nav">
-        <h2 class="nav-logo">Love<span>Bug</span></h2>
+        <div class="nav-logo">Love<span>Bug</span></div>
         <div class="nav-links">
-            <a href="discover.html" class="active"><i class="fa-solid fa-fire"></i></a>
-            <a href="chat.html"><i class="fa-solid fa-comment-dots"></i></a>
-            <a href="friends.html"><i class="fa-solid fa-user-group"></i></a>
-            <a href="profile.html"><i class="fa-solid fa-gear"></i></a>
+            <a href="home.html" title="Accueil"><i class="fa-solid fa-house"></i></a>
+            <a href="discover.html" class="active" title="Découvrir"><i class="fa-solid fa-compass"></i></a>
+            <a href="friends.html" title="Amis"><i class="fa-solid fa-user-group"></i></a>
+            <a href="chat.html" title="Messages"><i class="fa-solid fa-comment"></i></a>
+            <a href="profile.html" title="Profil"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
 
@@ -66,11 +67,15 @@
         </div>
     </div>
 
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="../assets/js/notifications.js"></script>
     <script src="../assets/js/discover.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
+                navigator.serviceWorker.register('../assets/js/sw.js')
+                    .then(reg => console.log('SW Registered', reg))
+                    .catch(err => console.error('SW Error', err));
             });
         }
     </script>

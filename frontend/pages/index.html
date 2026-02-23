@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoveBug - Rencontres Authentiques</title>
-    <link rel="manifest" href="../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="manifest" href="../assets/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
     <meta name="theme-color" content="#ff3366">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -68,11 +68,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(registration => {
-                    console.log('SW enregistré avec succès:', registration.scope);
-                }).catch(err => {
-                    console.log('Echec enregistrement SW:', err);
-                });
+                navigator.serviceWorker.register('../assets/js/sw.js')
+                    .then(reg => console.log('SW Registered', reg))
+                    .catch(err => console.error('SW Error', err));
             });
         }
     </script>
