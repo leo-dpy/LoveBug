@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Découverte</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <!-- On réutilise le style de base pour le background -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/discover.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Menu de navigation -->
+    <nav class="glass-nav">
+        <h2 class="nav-logo">Love<span>Bug</span></h2>
+        <div class="nav-links">
+            <a href="discover.html" class="active"><i class="fa-solid fa-fire"></i></a>
+            <a href="chat.html"><i class="fa-solid fa-comment-dots"></i></a>
+            <a href="friends.html"><i class="fa-solid fa-user-group"></i></a>
+            <a href="profile.html"><i class="fa-solid fa-gear"></i></a>
+        </div>
+    </nav>
+
+    <main class="discover-container">
+        <!-- Zone des cartes Tinder-like -->
+        <div id="card-stack" class="card-stack">
+            <!-- Les cartes seront injectées ici par le JS -->
+            <div class="loading-cards">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> Recherche d'âmes sœurs...
+            </div>
+        </div>
+
+        <!-- Contrôles Swipe -->
+        <div class="swipe-controls">
+            <button class="btn-action btn-reject" id="btn-reject">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button class="btn-action btn-like" id="btn-like">
+                <i class="fa-solid fa-heart"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal "It's a Match!" -->
+    <div id="match-modal" class="modal hidden">
+        <div class="modal-content glass-container glass-match">
+            <h2 class="match-title">It's a Match !</h2>
+            <p>Vous plaisez aussi à ce profil.</p>
+            <div class="match-actions">
+                <button class="btn-primary" onclick="window.location.href='chat.html'">Discuter</button>
+                <button class="btn-secondary" id="close-match">Continuer à swiper</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/discover.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "LoveBug",
+  "short_name": "LoveBug",
+  "description": "Trouvez l'étincelle avec LoveBug - Rencontres Authentiques.",
+  "start_url": "/pages/index.html",
+  "display": "standalone",
+  "background_color": "#0f0f13",
+  "theme_color": "#ff3366",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

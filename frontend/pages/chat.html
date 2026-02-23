@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Messagerie</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/chat.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="glass-nav">
+        <h2 class="nav-logo">Love<span>Bug</span></h2>
+        <div class="nav-links">
+            <a href="discover.html"><i class="fa-solid fa-fire"></i></a>
+            <a href="chat.html" class="active"><i class="fa-solid fa-comment-dots"></i></a>
+            <a href="friends.html"><i class="fa-solid fa-user-group"></i></a>
+            <a href="profile.html"><i class="fa-solid fa-gear"></i></a>
+        </div>
+    </nav>
+
+    <main class="chat-container glass-container">
+
+        <!-- Sidebar des conversations (Amis/Matchs) -->
+        <aside class="chat-sidebar" id="chat-sidebar">
+            <div class="sidebar-header">
+                <h3>Messages</h3>
+            </div>
+            <div class="contact-list" id="contact-list">
+                <p class="text-muted" style="padding: 1rem;"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...
+                </p>
+            </div>
+        </aside>
+
+        <!-- Zone de discussion principale -->
+        <section class="chat-main" id="chat-main">
+            <!-- État vide -->
+            <div class="empty-chat" id="empty-chat">
+                <i class="fa-solid fa-comment-dots"></i>
+                <p>Sélectionnez une conversation pour commencer à discuter</p>
+            </div>
+
+            <!-- Chat actif -->
+            <div class="active-chat hidden" id="active-chat">
+                <div class="chat-header">
+                    <button class="btn-back" id="btn-back-sidebar"><i class="fa-solid fa-chevron-left"></i></button>
+                    <img src="../assets/images/default.png" alt="Avatar" id="chat-avatar" class="chat-avatar">
+                    <h3 id="chat-username">Utilisateur</h3>
+                </div>
+
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Les messages seront injectés ici -->
+                </div>
+
+                <form class="chat-input-area" id="chat-form">
+                    <input type="text" id="message-input" placeholder="Écrivez un message..." required
+                        autocomplete="off">
+                    <button type="submit" class="btn-send"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Inclusion de Socket.io côté client -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="../assets/js/chat.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Rencontres Authentiques</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="glass-container">
+        <header class="logo-container">
+            <h1 class="logo">Love<span class="highlight">Bug</span></h1>
+            <p class="tagline">Trouvez l'étincelle.</p>
+        </header>
+
+        <section class="auth-box">
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-login">Connexion</button>
+                <button class="tab-btn" id="tab-register">Inscription</button>
+            </div>
+
+            <!-- Formulaire de Connexion -->
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required placeholder="votre@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Se Connecter</button>
+            </form>
+
+            <!-- Formulaire d'Inscription -->
+            <form id="register-form" class="auth-form" style="display: none;">
+                <div class="input-group">
+                    <label for="reg-username">Pseudo</label>
+                    <input type="text" id="reg-username" required placeholder="CoolName99">
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" required placeholder="votre@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Mot de passe</label>
+                    <input type="password" id="reg-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Créer mon compte</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('SW enregistré avec succès:', registration.scope);
+                }).catch(err => {
+                    console.log('Echec enregistrement SW:', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

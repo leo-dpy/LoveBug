@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Amis</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/friends.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="glass-nav">
+        <h2 class="nav-logo">Love<span>Bug</span></h2>
+        <div class="nav-links">
+            <a href="discover.html"><i class="fa-solid fa-fire"></i></a>
+            <a href="chat.html"><i class="fa-solid fa-comment-dots"></i></a>
+            <a href="friends.html" class="active"><i class="fa-solid fa-user-group"></i></a>
+            <a href="profile.html"><i class="fa-solid fa-gear"></i></a>
+        </div>
+    </nav>
+
+    <main class="friends-container glass-container">
+        <h2><i class="fa-solid fa-users"></i> Amis & Matchs</h2>
+
+        <div class="friends-tabs">
+            <button class="tab-btn active" id="tab-list">Mes Amis</button>
+            <button class="tab-btn" id="tab-requests">Demandes <span id="req-count"
+                    class="badge hidden">0</span></button>
+        </div>
+
+        <!-- Section Liste d'amis -->
+        <div id="friends-list" class="friends-section active">
+            <div id="friends-container" class="list-container">
+                <p class="text-muted"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</p>
+            </div>
+
+            <div class="add-friend-form">
+                <input type="number" id="friend-id-input" placeholder="ID de l'ami à ajouter...">
+                <button id="btn-add-friend" class="btn-primary" style="margin-top: 0; padding: 0.8rem;"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+
+        <!-- Section Demandes -->
+        <div id="requests-list" class="friends-section" style="display: none;">
+            <div id="requests-container" class="list-container">
+                <p class="text-muted">Aucune demande en attente.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/friends.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>

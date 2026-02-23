@@ -1,0 +1,224 @@
+/* --- Discover Section --- */
+.discover-container {
+    padding-top: 100px;
+    /* Offset for nav */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.card-stack {
+    position: relative;
+    width: 90%;
+    max-width: 380px;
+    height: 60vh;
+    max-height: 550px;
+    margin-bottom: 2rem;
+}
+
+.loading-cards {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    gap: 1rem;
+}
+
+.loading-cards i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* --- Swipe Card --- */
+.swipe-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 25, 0.85);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    /* Default z-index */
+}
+
+.swipe-card:active {
+    cursor: grabbing;
+}
+
+.card-image {
+    width: 100%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    background-color: #2a2a35;
+    /* Fallback */
+    position: relative;
+}
+
+.card-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(20, 20, 25, 1), transparent);
+}
+
+.card-info {
+    padding: 1.5rem;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-name {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+}
+
+.card-bio {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-stamp {
+    position: absolute;
+    top: 40px;
+    padding: 0.5rem 1rem;
+    border: 4px solid;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    opacity: 0;
+    z-index: 10;
+    transform: rotate(-15deg);
+}
+
+.stamp-nope {
+    right: 40px;
+    color: #ff4b4b;
+    border-color: #ff4b4b;
+    transform: rotate(15deg);
+}
+
+.stamp-like {
+    left: 40px;
+    color: #4cd964;
+    border-color: #4cd964;
+    transform: rotate(-15deg);
+}
+
+/* --- Controls --- */
+.swipe-controls {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.btn-action {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-reject {
+    color: #ff4b4b;
+}
+
+.btn-like {
+    color: #4cd964;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+}
+
+.btn-reject:hover {
+    box-shadow: 0 0 20px rgba(255, 75, 75, 0.4);
+}
+
+.btn-like:hover {
+    box-shadow: 0 0 20px rgba(76, 217, 100, 0.4);
+}
+
+.btn-action:active {
+    transform: scale(0.95);
+}
+
+/* --- Match Modal --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.glass-match {
+    text-align: center;
+    padding: 3rem;
+    box-shadow: 0 0 50px var(--primary-glow);
+    border: 1px solid var(--primary-color);
+}
+
+.match-title {
+    font-size: 3rem;
+    font-style: italic;
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--primary-glow);
+    margin-bottom: 1rem;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+}

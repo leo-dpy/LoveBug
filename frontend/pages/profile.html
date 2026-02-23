@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveBug - Mon Profil</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/images/icon-192x192.png">
+    <meta name="theme-color" content="#ff3366">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="glass-nav">
+        <h2 class="nav-logo">Love<span>Bug</span></h2>
+        <div class="nav-links">
+            <a href="discover.html"><i class="fa-solid fa-fire"></i></a>
+            <a href="chat.html"><i class="fa-solid fa-comment-dots"></i></a>
+            <a href="friends.html"><i class="fa-solid fa-user-group"></i></a>
+            <a href="profile.html" class="active"><i class="fa-solid fa-gear"></i></a>
+        </div>
+    </nav>
+
+    <main class="profile-container glass-container scrollable-area">
+
+        <header class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="../assets/images/default.png" alt="Avatar" id="profile-picture" class="profile-avatar">
+                <button class="btn-edit-avatar"><i class="fa-solid fa-camera"></i></button>
+            </div>
+            <h2 id="profile-username">Mon Profil</h2>
+            <p class="text-muted" id="profile-email">email@lovebug.com</p>
+        </header>
+
+        <form id="profile-form" class="profile-form">
+
+            <div class="form-section">
+                <h3>Informations Personnelles</h3>
+
+                <div class="input-group">
+                    <label for="bio">À propos de moi</label>
+                    <textarea id="bio" rows="4" placeholder="Dites-en plus sur vous..."></textarea>
+                </div>
+
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="gender">Je suis</label>
+                        <select id="gender" class="glass-select">
+                            <option value="male">Homme</option>
+                            <option value="female">Femme</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="location">Ville</label>
+                        <input type="text" id="location" placeholder="Ex: Paris">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Préférences de Match</h3>
+
+                <div class="input-group">
+                    <label for="preferences">Je recherche</label>
+                    <select id="preferences" class="glass-select">
+                        <option value="male">Des hommes</option>
+                        <option value="female">Des femmes</option>
+                        <option value="everyone">Tout le monde</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit" class="btn-primary" id="btn-save">Enregistrer les modifications</button>
+                <button type="button" class="btn-danger" id="btn-logout"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="../assets/js/profile.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>
