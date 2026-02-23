@@ -31,3 +31,22 @@ exports.updateProfile = async (req, res) => {
         res.status(500).json({ message: "Erreur serveur" });
     }
 };
+
+exports.updateAvatar = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: "Aucun fichier reçu." });
+        }
+
+        const userId = req.user.id;
+        const profilePictureUrl = `http://localhost:3000/uploads/profiles/${req.file.filename}`;
+
+        const sql = `UPDATE users SET profile_picture = ? WHERE id = ?`;
+        await db.execute(sql, [profilePictureUrl, userId]);
+
+        res.status(200).json({ message: "Avatar mis à jour", profile_picture: profilePictureUrl });
+    } catch (error) {
+        console.error("Erreur updateAvatar:", error);
+        res.status(500).json({ message: "Erreur serveur" });
+    }
+};

@@ -14,6 +14,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Événements
     document.getElementById('profile-form').addEventListener('submit', (e) => saveProfile(e, token));
 
+    // Upload Avatar Logic
+    const btnEditAvatar = document.getElementById('btn-edit-avatar');
+    const avatarUpload = document.getElementById('avatar-upload');
+
+    if (btnEditAvatar && avatarUpload) {
+        btnEditAvatar.addEventListener('click', (e) => {
+            e.preventDefault(); // éviter un submit de form invisible
+            avatarUpload.click();
+        });
+
+        avatarUpload.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const btnIcon = btnEditAvatar.innerHTML;
+                btnEditAvatar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+                const res = await fetch(`${API_URL}/profile/upload-avatar`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+
+                const data = await res.json();
+                btnEditAvatar.innerHTML = btnIcon; // remettre l'icone caméra
+
+                if (res.ok) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+
+                    const userStr = localStorage.getItem('user');
+                    if (userStr) {
+                        const user = JSON.parse(userStr);
+                        user.profile_picture = data.profile_picture;
+                        localStorage.setItem('user', JSON.stringify(user));
+                    }
+                } else {
+                    alert(data.message || 'Erreur lors de l\'upload');
+                }
+            } catch (err) {
+                console.error('Erreur upload avatar', err);
+                alert('Erreur réseau');
+                btnEditAvatar.innerHTML = '<i class="fa-solid fa-camera"></i>';
+            }
+        });
+    }
+
     document.getElementById('btn-logout').addEventListener('click', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');

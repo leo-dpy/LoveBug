@@ -10,16 +10,12 @@
 
 /* Scrollbar customization */
 .scrollable-area::-webkit-scrollbar {
-    width: 6px;
+    display: none;
 }
 
-.scrollable-area::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.scrollable-area::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 10px;
+.scrollable-area {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* Header */
