@@ -90,6 +90,10 @@
     color: var(--text-muted);
 }
 
+.empty-chat.hidden {
+    display: none;
+}
+
 .empty-chat i {
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.1);
@@ -100,6 +104,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
+    /* Empêche le conteneur de grandir à l'infini et de cacher l'input */
 }
 
 .active-chat.hidden {
@@ -232,8 +238,10 @@
     .chat-container {
         width: 100%;
         max-width: 100%;
-        height: calc(100vh - 70px);
-        margin-top: 70px;
+        height: 100vh;
+        margin: 0;
+        padding-bottom: 90px;
+        /* Laisse de la place pour la barre de navigation du bas */
         border-radius: 0;
         border: none;
     }
