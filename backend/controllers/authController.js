@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const db = require('../config/db');
 require('dotenv').config();
 
 exports.register = async (req, res) => {
@@ -60,8 +61,8 @@ exports.login = async (req, res) => {
             { expiresIn: '24h' }
         );
 
-        // Mettre à jour la date de dernière connexion
-        await db.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?', [user.id]);
+        // Mettre à jour la date de dernière connexion (Désactivé temporairement pour éviter les crashs)
+        // await db.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?', [user.id]);
 
         res.status(200).json({
             message: "Connexion réussie !",
@@ -70,7 +71,9 @@ exports.login = async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                profile_picture: user.profile_picture
+                profile_picture: user.profile_picture,
+                friend_id: user.friend_id,
+                tokens: user.tokens
             }
         });
     } catch (error) {

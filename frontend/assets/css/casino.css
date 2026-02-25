@@ -1,0 +1,413 @@
+.casino-container::-webkit-scrollbar {
+    display: none;
+}
+
+.casino-container {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    width: 90%;
+    max-width: 800px;
+    height: 85vh;
+    margin: 20px auto 110px auto;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 1.5rem;
+    padding-top: 15px;
+    overflow-y: auto;
+}
+
+.casino-orbs {
+    background: radial-gradient(circle at 50% 50%, #1a0b16, #0a0a0a);
+}
+
+.casino-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.casino-header h1 span {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+}
+
+.balance-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 15px;
+    background: rgba(40, 40, 40, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.2);
+}
+
+.neon-icon {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.game-section {
+    padding: 15px 15px;
+    margin-top: 80px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    background: transparent;
+    border: none;
+}
+
+.hidden-game {
+    display: none !important;
+}
+
+/* Tabs */
+.casino-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.casino-tabs .tab-btn {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.casino-tabs .tab-btn:hover {
+    background: rgba(40, 40, 40, 0.8);
+    transform: translateY(-2px);
+}
+
+.casino-tabs .tab-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.casino-tabs .tab-btn.active::after {
+    display: none;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Wheel of Fortune / Casino Roulette */
+.roulette-casino-container {
+    width: 250px;
+    height: 250px;
+}
+
+.wheel-container {
+    position: relative;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    z-index: 20;
+    text-shadow: 0 0 10px var(--primary-color);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+}
+
+.wheel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 7s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    /* Longer spin for Casino Roulette */
+}
+
+/* 8 slices = 45 deg per slice */
+.wheel .slice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* True 45deg pie slice from the center */
+    clip-path: polygon(50% 50%, 29.3% 0, 70.7% 0);
+    transform-origin: 50% 50%;
+    /* i from 0 to 7 */
+    transform: rotate(calc(45deg * var(--i)));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.bg-red {
+    background-color: #ff4b4b;
+}
+
+.bg-black {
+    background-color: #222;
+}
+
+.bg-green {
+    background-color: #00fa9a;
+    color: #000;
+}
+
+.bg-green span {
+    text-shadow: none;
+    color: #000;
+}
+
+/* Controls */
+.bet-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.color-bet-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.hidden-radio {
+    display: none;
+}
+
+.color-btn {
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bg-red-btn {
+    background-color: #ff4b4b;
+}
+
+.bg-black-btn {
+    background-color: #222;
+    border: 1px solid #444;
+}
+
+.bg-green-btn {
+    background-color: #00fa9a;
+    color: #000;
+}
+
+.hidden-radio:checked+.color-btn {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px currentColor;
+    border-color: #fff;
+}
+
+.neon-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 51, 102, 0.5);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.neon-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+}
+
+.neon-btn {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.game-result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 30px;
+    transition: opacity 0.3s ease;
+}
+
+.win-text {
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.lose-text {
+    color: #f44336;
+    text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+}
+
+/* Russian Roulette */
+.roulette-container {
+    padding: 10px 0 30px 0;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.revolver-cylinder {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #444, #111);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    border: 4px solid #222;
+    transition: transform 3s cubic-bezier(0.2, 0.8, 0.3, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.revolver-cylinder::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #0a0a0a;
+    border-radius: 50%;
+    border: 2px solid #333;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.chamber {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);
+    border-radius: 50%;
+    border: 2px solid #333;
+    box-shadow: inset 0 0 15px #000;
+    /* Positioned by JS using transform rotate + translate */
+}
+
+/* Bullet inside chamber (used when game ends and reveals) */
+.chamber.has-bullet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.chamber.show-bullet::after {
+    opacity: 1;
+}
+
+/* Firing effects */
+.revolver-cylinder.firing {
+    animation: recoil 0.1s ease-in-out;
+}
+
+@keyframes recoil {
+    0% {
+        transform: translateY(0) scale(1) rotate(var(--current-rot));
+    }
+
+    50% {
+        transform: translateY(-10px) scale(0.98) rotate(var(--current-rot));
+    }
+
+    100% {
+        transform: translateY(0) scale(1) rotate(var(--current-rot));
+    }
+}
+
+.flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.flash-overlay.active {
+    animation: flashBang 0.2s ease-out;
+}
+
+@keyframes flashBang {
+    0% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.danger-action {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+}
+
+.danger-action:hover {
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
+    transform: translateY(-2px);
+}
+
+.game-desc {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 20px;
+}

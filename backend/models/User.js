@@ -2,8 +2,12 @@ const db = require('../config/db');
 
 class User {
     static async create(username, email, passwordHash) {
-        const sql = `INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)`;
-        const [result] = await db.execute(sql, [username, email, passwordHash]);
+        // Generate a random 8-character string for friend ID
+        const randomString = Math.random().toString(36).substring(2, 10).toUpperCase();
+        const friendId = `${username.substring(0, 3).toUpperCase()}-${randomString}`;
+
+        const sql = `INSERT INTO users (username, email, password_hash, friend_id) VALUES (?, ?, ?, ?)`;
+        const [result] = await db.execute(sql, [username, email, passwordHash, friendId]);
         return result.insertId;
     }
 
@@ -14,7 +18,7 @@ class User {
     }
 
     static async findById(id) {
-        const sql = `SELECT id, username, email, bio, profile_picture, gender, preferences, location FROM users WHERE id = ?`;
+        const sql = `SELECT id, username, email, bio, profile_picture, gender, preferences, location, friend_id, tokens FROM users WHERE id = ?`;
         const [rows] = await db.execute(sql, [id]);
         return rows[0];
     }

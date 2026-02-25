@@ -37,6 +37,7 @@ body {
     z-index: -1;
     overflow: hidden;
     filter: blur(80px);
+    pointer-events: none;
 }
 
 .orb {
@@ -95,6 +96,7 @@ body {
     max-width: 450px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     z-index: 10;
+    position: relative;
     animation: fadeIn 0.8s ease-out;
 }
 

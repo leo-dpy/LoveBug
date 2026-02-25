@@ -4,31 +4,42 @@ const db = require('../config/db');
 exports.sendRequest = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { targetUserId } = req.body;
+        const { targetUsername } = req.body;
 
-        if (userId === parseInt(targetUserId)) {
+        // Trouver l'id de la base de données via le Pseudo
+        const [rowsUser] = await db.execute('SELECT id FROM users WHERE username = ?', [targetUsername]);
+        if (rowsUser.length === 0) {
+            return res.status(404).json({ message: "Pseudo introuvable." });
+        }
+
+        const realTargetId = rowsUser[0].id;
+
+        if (userId === realTargetId) {
             return res.status(400).json({ message: "Vous ne pouvez pas vous ajouter vous-même." });
         }
 
         // Vérifier si une demande existe déjà
         const checkSql = `SELECT * FROM friends WHERE (user_id_1 = ? AND user_id_2 = ?) OR (user_id_1 = ? AND user_id_2 = ?)`;
-        const [rows] = await db.execute(checkSql, [userId, targetUserId, targetUserId, userId]);
+        const [rows] = await db.execute(checkSql, [userId, realTargetId, realTargetId, userId]);
 
         if (rows.length > 0) {
             return res.status(400).json({ message: "Une relation existe déjà entre ces utilisateurs." });
         }
 
         const insertSql = `INSERT INTO friends (user_id_1, user_id_2, status) VALUES (?, ?, 'pending')`;
-        await db.execute(insertSql, [userId, targetUserId]);
+        await db.execute(insertSql, [userId, realTargetId]);
 
         // Emit notification
         const io = req.app.get('io');
         const connectedUsers = req.app.get('connectedUsers');
-        const targetSocketId = connectedUsers.get(parseInt(targetUserId));
-        if (targetSocketId) {
-            io.to(targetSocketId).emit('new_friend_request', {
-                message: "Quelqu'un veut être votre ami(e) !"
-            });
+
+        if (io && connectedUsers) {
+            const targetSocketId = connectedUsers.get(realTargetId);
+            if (targetSocketId) {
+                io.to(targetSocketId).emit('new_friend_request', {
+                    message: "Quelqu'un veut être votre ami(e) !"
+                });
+            }
         }
 
         res.status(200).json({ message: "Demande d'ami envoyée." });
@@ -44,7 +55,6 @@ exports.acceptRequest = async (req, res) => {
         const userId = req.user.id;
         const { requestId } = req.body;
 
-        // On vérifie que la demande est bien pour nous (user_id_2 = userId)
         const updateSql = `UPDATE friends SET status = 'accepted' WHERE id = ? AND user_id_2 = ? AND status = 'pending'`;
         const [result] = await db.execute(updateSql, [requestId, userId]);
 

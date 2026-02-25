@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Envoyer une demande
     document.getElementById('btn-add-friend').addEventListener('click', () => {
         const input = document.getElementById('friend-id-input');
-        if (input.value) sendRequest(token, input.value);
+        if (input.value) sendRequest(token, input.value.trim());
     });
 
     // Chargement initial
@@ -60,7 +60,7 @@ async function fetchFriends(token) {
                 <div class="user-item">
                     <img src="${imgUrl}" alt="${f.username}" class="user-avatar">
                     <div class="user-info">
-                        <div class="user-name">${f.username} <span class="text-muted" style="font-size:0.8rem">#${f.id}</span></div>
+                        <div class="user-name">${f.username}</div>
                         <div class="user-status">Ami / Match</div>
                     </div>
                     <button class="btn-icon chat" onclick="goToChat(${f.id}, '${f.username}')" title="Discuter">
@@ -115,7 +115,7 @@ async function fetchRequests(token) {
     }
 }
 
-async function sendRequest(token, targetId) {
+async function sendRequest(token, targetUsername) {
     try {
         const res = await fetch(`${API_URL}/friends/request`, {
             method: 'POST',
@@ -123,7 +123,7 @@ async function sendRequest(token, targetId) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ targetUserId: targetId })
+            body: JSON.stringify({ targetUsername })
         });
 
         const data = await res.json();

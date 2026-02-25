@@ -11,6 +11,7 @@ const discoverRoutes = require('./routes/discoverRoutes'); // Discover routes
 const friendRoutes = require('./routes/friendRoutes'); // Friend routes
 const chatRoutes = require('./routes/chatRoutes'); // Chat routes
 const profileRoutes = require('./routes/profileRoutes'); // Profile routes
+const casinoRoutes = require('./routes/casinoRoutes'); // Casino routes
 
 const app = express();
 const server = http.createServer(app);
@@ -26,6 +27,7 @@ app.use('/api/discover', discoverRoutes);
 app.use('/api/friends', friendRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/casino', casinoRoutes);
 
 // Tâches planifiées (Cron Jobs) pour le nettoyage des données
 // 1. Supprimer les messages non sauvegardés de plus d'1 mois (Exécuté tous les jours à minuit)

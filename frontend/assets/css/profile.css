@@ -1,10 +1,14 @@
 .profile-container {
     width: 90%;
     max-width: 600px;
+    height: 75vh;
+    margin: 40px auto 110px auto;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
     padding: 2.5rem;
     padding-top: 20px;
-    padding-bottom: 110px;
-    height: 100vh;
     overflow-y: auto;
 }
 
@@ -41,6 +45,48 @@
     object-fit: cover;
     border: 3px solid var(--primary-color);
     box-shadow: 0 0 20px rgba(255, 51, 102, 0.3);
+}
+
+/* Friend ID Badge */
+.friend-id-badge {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 8px 15px;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.id-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.id-value {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.btn-copy-id {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    padding: 5px;
+}
+
+.btn-copy-id:hover {
+    color: #fff;
+    transform: scale(1.1);
 }
 
 .btn-edit-avatar {

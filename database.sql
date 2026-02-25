@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
     gender ENUM('male', 'female', 'other') DEFAULT 'other',
     preferences ENUM('male', 'female', 'everyone') DEFAULT 'everyone',
     location VARCHAR(100),
+    friend_id VARCHAR(20) UNIQUE,
+    tokens INT DEFAULT 100,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
